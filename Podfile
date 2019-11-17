@@ -9,5 +9,4 @@ target 'Testing3dModelInGoogleMaps' do
 
 pod 'GoogleMaps'
 pod 'GooglePlaces'
-
 end
