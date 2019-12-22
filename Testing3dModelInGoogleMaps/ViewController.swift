@@ -6,7 +6,6 @@ import SceneKit
  
 class HHCarMarker:GMSMarker {
     var cameraNode = SCNNode()
-//    let scene = SCNScene(named:"Assets.scnassets/lexus_hs.obj")!
     let scene = SCNScene(named:"Assets.scnassets/Tesla+Model+X.dae")!
 
     let sceneView = SCNView.init()
@@ -98,7 +97,6 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         mapView.settings.rotateGestures = false
         mapView.settings.tiltGestures = false
         mapView.animate(toZoom:  16)
-        //mapView.animate(toViewingAngle: 0)
         marker = HHCarMarker.init()
         marker.map = mapView
         self.mapView.animate(toViewingAngle: 20)
