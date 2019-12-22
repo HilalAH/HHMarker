@@ -12,6 +12,7 @@
 		8C3AFA0123082B8D003C79E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C3AF9FF23082B8D003C79E9 /* Main.storyboard */; };
 		8C3AFA0323082B8F003C79E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C3AFA0223082B8F003C79E9 /* Assets.xcassets */; };
 		8C3AFA0623082B8F003C79E9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C3AFA0423082B8F003C79E9 /* LaunchScreen.storyboard */; };
+		8C5CC90C23A57EAC008F74FC /* mapStyle.json in Resources */ = {isa = PBXBuildFile; fileRef = 8C5CC90B23A57EAC008F74FC /* mapStyle.json */; };
 		978400C4230DDBEC0000CADD /* Assets.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 978400C3230DDBEC0000CADD /* Assets.scnassets */; };
 		E175954FEAAB43B4469BB61D /* Pods_Testing3dModelInGoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62D5F59E6223E0D3157E5619 /* Pods_Testing3dModelInGoogleMaps.framework */; };
 /* End PBXBuildFile section */
@@ -27,6 +28,7 @@
 		8C3AFA0223082B8F003C79E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8C3AFA0523082B8F003C79E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8C3AFA0723082B8F003C79E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8C5CC90B23A57EAC008F74FC /* mapStyle.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mapStyle.json; sourceTree = "<group>"; };
 		978400C3230DDBEC0000CADD /* Assets.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Assets.scnassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,6 +89,7 @@
 				8C3AFA0223082B8F003C79E9 /* Assets.xcassets */,
 				8C3AFA0423082B8F003C79E9 /* LaunchScreen.storyboard */,
 				8C3AFA0723082B8F003C79E9 /* Info.plist */,
+				8C5CC90B23A57EAC008F74FC /* mapStyle.json */,
 			);
 			path = Testing3dModelInGoogleMaps;
 			sourceTree = "<group>";
@@ -102,7 +105,7 @@
 				8C3AF9F423082B8D003C79E9 /* Sources */,
 				8C3AF9F523082B8D003C79E9 /* Frameworks */,
 				8C3AF9F623082B8D003C79E9 /* Resources */,
-				88B8D576F859665BB621BABE /* [CP] Copy Pods Resources */,
+				623475785E496A7721C79193 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -153,6 +156,7 @@
 			files = (
 				978400C4230DDBEC0000CADD /* Assets.scnassets in Resources */,
 				8C3AFA0623082B8F003C79E9 /* LaunchScreen.storyboard in Resources */,
+				8C5CC90C23A57EAC008F74FC /* mapStyle.json in Resources */,
 				8C3AFA0323082B8F003C79E9 /* Assets.xcassets in Resources */,
 				8C3AFA0123082B8D003C79E9 /* Main.storyboard in Resources */,
 			);
@@ -161,7 +165,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		88B8D576F859665BB621BABE /* [CP] Copy Pods Resources */ = {
+		623475785E496A7721C79193 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (

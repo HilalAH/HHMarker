@@ -7,6 +7,7 @@ target 'Testing3dModelInGoogleMaps' do
 
   # Pods for Testing3dModelInGoogleMaps
 
-pod 'GoogleMaps'
-pod 'GooglePlaces'
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
+
 end
