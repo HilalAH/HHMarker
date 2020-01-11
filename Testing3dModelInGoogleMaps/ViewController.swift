@@ -3,81 +3,33 @@ import GoogleMaps
 import CoreLocation
 import SceneKit
 
- 
-class HHCarMarker:GMSMarker {
-    var cameraNode = SCNNode()
-    let scene = SCNScene(named:"Assets.scnassets/Tesla+Model+X.dae")!
+let CAR_COUNT_LIMIT = 60
 
-    let sceneView = SCNView.init()
-    var car = SCNNode()
- 
-    let horizontalTiltDegree: Double = 10.0
-    //let cameraAltitude: Float = 80.0
-    let cameraAltitude: Float = 13
-    let containerView = UIView(frame: CGRect(x: 0, y: 0, width: 150, height: 150))
-    var lastHeading : Double = 0.0
-    var heading:CLHeading = CLHeading(){
-        didSet {
-            self.car.eulerAngles = SCNVector3(x:0, y: -Float(deg2rad(self.heading.trueHeading)) - Float(Double.pi/2) , z: 0.0)
-        }
-    }
-    
-    var scale: Float = 1 {
-        didSet {
-            car.scale = SCNVector3(x: scale, y: scale, z: scale)
-        }
-    }
-    
-    override init(){
-        super.init()
-        self.appearAnimation = .pop
-        setupSceneKit()
-    }
-    func setupSceneKit() {
-        cameraNode.camera = SCNCamera()
-        cameraNode.position = SCNVector3.init(7, 8, 0.0)
-        cameraNode.eulerAngles = SCNVector3(x: Float(deg2rad(3)), y: Float(Double.pi/2), z: Float(deg2rad(40)))
-        
-        scene.rootNode.addChildNode(cameraNode)
-        sceneView.frame = containerView.bounds
-        containerView.addSubview(sceneView)
-        sceneView.allowsCameraControl = false
-        sceneView.autoenablesDefaultLighting = true
-        sceneView.backgroundColor = UIColor.clear
-        sceneView.scene = scene
-        sceneView.antialiasingMode = .none
-        containerView.addSubview(sceneView)
-         
-        self.iconView = containerView
-        self.groundAnchor = CGPoint.init(x: 0.5, y: 0.5)
-        
-        car = scene.rootNode.childNode(withName: "parent", recursively: true)!
-        //car.geometry?.materials.first?.diffuse.contents = UIImage(named: "Assets.scnassets/Lexus jpg.jpg")
-        car.scale = SCNVector3(x: scale, y: scale, z: scale)
-        car.eulerAngles = SCNVector3(x: 0 , y:  0  , z: 0.0)
-        
-        
-    }
-    
-   
-    
+enum CarName: String {
+    case teslaModelX = "Tesla+Model+X.dae"
 }
-func deg2rad(_ number: Double) -> Double {
-       return number * .pi / 180
-   }
 
-class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDelegate, SCNSceneRendererDelegate {
+ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDelegate, SCNSceneRendererDelegate {
     @IBOutlet weak var mapView: GMSMapView!
     var locationManager = CLLocationManager()
-    var marker:HHCarMarker!
+    var markers: [HHCarMarker] = []
+
+    @IBOutlet weak var counter: UILabel!
  
-    
+    @IBAction func removeCar(_ sender: Any) {
+        removeMarker()
+    }
+
+    @IBAction func addCar(_ sender: Any) {
+        createMarker()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupMap()
         setupLocationManager()
-     }
-    
+    }
+
     func setupLocationManager() {
         self.locationManager = CLLocationManager()
         self.locationManager.requestAlwaysAuthorization()
@@ -88,7 +40,30 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         locationManager.startUpdatingLocation()
         locationManager.startUpdatingHeading()
     }
-    
+
+    func createMarker(location: CLLocationCoordinate2D? = nil) {
+        guard markers.count < CAR_COUNT_LIMIT else {
+            print("The limit has been exceeded.")
+            return
+        }
+        let marker = HHCarMarker.init(car: .teslaModelX)
+        marker.map = mapView
+        if let location = location {
+            marker.position = location
+        }
+        markers.append(marker)
+        counter.text = "\(markers.count)"
+    }
+
+    func removeMarker() {
+        guard !markers.isEmpty else {
+            return
+        }
+        let marker = markers.removeLast()
+        marker.map = nil
+        counter.text = "\(markers.count)"
+    }
+
     func setupMap() {
         mapView.delegate = self
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -97,35 +72,36 @@ class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDel
         mapView.settings.rotateGestures = false
         mapView.settings.tiltGestures = false
         mapView.animate(toZoom:  16)
-        marker = HHCarMarker.init()
-        marker.map = mapView
+        createMarker()
         self.mapView.animate(toViewingAngle: 20)
         if let styleURL = Bundle.main.url(forResource: "mapStyle", withExtension: "json") {
             mapView.mapStyle = try! GMSMapStyle(contentsOfFileURL: styleURL)
-         }
-
-        
+        }
     }
-    
+
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations.last?.coordinate
-        marker.position = location!
+
+        for (i, marker) in markers.enumerated() {
+            let offset = 0.001 * Double(i)
+            marker.position = .init(latitude: location!.latitude + offset, longitude: location!.longitude)
+        }
         self.mapView.animate(toLocation: location!)
     }
+
     func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
         let zoom = position.zoom
-        let scale = (position.zoom/16)
-        print(scale)
-        marker.scale = scale > 1 ? 1: scale
-        print(marker.scale)
-     }
+        let scale = (position.zoom/20)
+//        print(scale)
+         for marker in markers {
+            marker.scale = scale > 1 ? 1: scale
+            print(marker.scale)
+        }
+    }
 
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-   
-        marker.heading = newHeading
-        
-     }
+        for marker in markers {
+            marker.heading = newHeading.trueHeading
+        }
+    }
 }
-
-
-  
