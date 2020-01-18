@@ -1,3 +1,10 @@
+//
+//  ViewController.swift
+//  Testing3dModelInGoogleMaps
+//
+//  Created by Hilal Al Hakkani on 1/8/20.
+//  Copyright © 2020 Hilal. All rights reserved.
+//
 import UIKit
 import GoogleMaps
 import CoreLocation
@@ -5,9 +12,7 @@ import SceneKit
 
 let CAR_COUNT_LIMIT = 60
 
-enum CarName: String {
-    case teslaModelX = "Tesla+Model+X.dae"
-}
+
 
  class ViewController: UIViewController, GMSMapViewDelegate, CLLocationManagerDelegate, SCNSceneRendererDelegate {
     @IBOutlet weak var mapView: GMSMapView!

@@ -46,3 +46,7 @@ class HHCarMarker:GMSMarker {
         updateIcon()
     }
 }
+
+enum CarName: String {
+    case teslaModelX = "Tesla+Model+X.dae"
+}
