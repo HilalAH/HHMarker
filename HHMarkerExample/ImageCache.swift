@@ -83,7 +83,6 @@ final class ImageCache {
         }
 
         // Generate a scaled image
-        DispatchQueue.global(qos: .userInteractive).async {
             var imageContainer: [[UIImage]] = []
             for (i, scale) in self.scales.enumerated() {
                 var images: [UIImage] = []
@@ -101,7 +100,7 @@ final class ImageCache {
             self.cache[car] = imageContainer
         }
 
-    }
+    
 }
 
 

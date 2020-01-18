@@ -90,10 +90,8 @@ enum CarName: String {
     }
 
     func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
-        let zoom = position.zoom
         let scale = (position.zoom/20)
-//        print(scale)
-         for marker in markers {
+        for marker in markers {
             marker.scale = scale > 1 ? 1: scale
             print(marker.scale)
         }

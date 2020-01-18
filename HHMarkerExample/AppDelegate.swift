@@ -12,7 +12,7 @@
 
      func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
          // Override point for customization after application launch.
-         GMSServices.provideAPIKey("AIzaSyA645rV4ZFiQj6DnNYzC-SLPX_hBbh7I1Y")
+         GMSServices.provideAPIKey("Enter your API key")
 
          return true
      }

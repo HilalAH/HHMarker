@@ -13,8 +13,7 @@ import UIKit
 
 class HHCarMarker:GMSMarker {
     private var car: CarName!
-    
-    var heading: Double = 0.0{
+     var heading: Double = 0.0{
         didSet {
             updateIcon()
         }
@@ -28,10 +27,9 @@ class HHCarMarker:GMSMarker {
 
     func updateIcon() {
         print(heading)
-         let roundedHeading = Int(heading / ImageCache.step)
-         print(roundedHeading)
+        let roundedHeading = Int(heading / ImageCache.step)
+        print(roundedHeading)
         print("**********")
-
         self.icon = ImageCache.shared.getImage(car: car, roundedHeading: roundedHeading, scale: scale)
     }
 
